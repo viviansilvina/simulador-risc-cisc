@@ -78,6 +78,11 @@ export const x86Program = {
                     description: "Buscando ADD."
                 },
                 {
+                    component: "x86-inst-memory",
+                    title: "INSTRUCTION FETCH",
+                    description: "A instrução ADD é buscada da memória."
+                },
+                {
                     component: "x86-decoder",
                     title: "DECODE",
                     description: "ADD identificado."
@@ -131,6 +136,11 @@ export const x86Program = {
                     description: "Buscando MOV."
                 },
                 {
+                    component: "x86-inst-memory",
+                    title: "INSTRUCTION FETCH",
+                    description: "MOV carregado da memória."
+                },
+                {
                     component: "x86-decoder",
                     title: "DECODE",
                     description: "MOV identificado."
@@ -139,6 +149,11 @@ export const x86Program = {
                     component: "x86-microcode",
                     title: "MICROCODE",
                     description: "Micro-operações geradas."
+                },
+                {
+                    component: "x86-registers",
+                    title: "READ REGISTER",
+                    description: "AX = 8 é lido do banco de registradores."
                 },
                 {
                     component: "x86-agu",

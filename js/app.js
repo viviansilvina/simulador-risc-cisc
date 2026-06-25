@@ -38,6 +38,36 @@ const resetButton = document.getElementById("reset-btn");
 const runAllButton = document.getElementById("run-all-btn");
 const themeToggleButton = document.getElementById("theme-toggle");
 
+// Mapeamento de componentes que trabalham em paralelo
+const parallelComponents = {
+    // MIPS
+    "mips-control": ["mips-registers", "mips-alu"],
+    "mips-registers": ["mips-control", "mips-alu"],
+    "mips-alu": ["mips-control", "mips-registers"],
+    
+    // x86
+    "x86-agu": ["x86-memory", "x86-alu"],
+    "x86-alu": ["x86-agu", "x86-flags"],
+    "x86-flags": ["x86-alu"]
+};
+
+function activateComponentWithParallel(componentId) {
+    // Pega o componente principal
+    let componentsToActivate = [componentId];
+    
+    // Adiciona componentes paralelos se existirem
+    const parallel = parallelComponents[componentId];
+    if (parallel) {
+        componentsToActivate = [...componentsToActivate, ...parallel];
+    }
+    
+    // Ativa todos juntos
+    activateComponent(componentsToActivate);
+    
+    // Ativa as linhas do componente principal
+    activateLine(simulation.program.architecture.toLowerCase(), componentId);
+}
+
 initialize();
 
 function initialize() {
@@ -176,14 +206,7 @@ function startSimulation() {
 
     resetDatapath();
 
-    activateComponent(
-        firstCycle.component
-    );
-
-    activateLine(
-        simulation.program.architecture.toLowerCase(),
-        firstCycle.component
-    );
+    activateComponentWithParallel(firstCycle.component);
 
     explanationContainer.innerHTML = `
         <h3>${instruction.code}</h3>
@@ -275,14 +298,7 @@ function nextCycle() {
             cycle.component
         );
 
-        activateComponent(
-            cycle.component
-        );
-
-        activateLine(
-            simulation.program.architecture.toLowerCase(),
-            cycle.component
-        );
+        activateComponentWithParallel(cycle.component);
     }
 
     renderExplanation(
@@ -372,6 +388,7 @@ function nextInstruction() {
         "RENDER FINALIZADO"
     );
 }
+
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -411,8 +428,9 @@ async function runAll() {
 
         resetDatapath();
 
-        activateComponent(cycle.component);
-        activateLine(simulation.program.architecture.toLowerCase(), cycle.component);
+        if (cycle.component) {
+            activateComponentWithParallel(cycle.component);
+        }
 
         renderExplanation(
             explanationContainer,
@@ -443,6 +461,7 @@ async function runAll() {
         <p>Execução automática finalizada.</p>
     `;
 }
+
 function resetSimulation() {
 
     console.log("RESET SIMULATION");

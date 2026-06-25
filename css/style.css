@@ -367,3 +367,8 @@ body.dark-theme .info-box {
         stroke-dashoffset: 0;
     }
 }
+.component-parallel {
+    fill: #f59e0b !important; /* Amarelo/Laranja */
+    stroke: #f59e0b !important;
+    animation: pulse 1s infinite;
+}

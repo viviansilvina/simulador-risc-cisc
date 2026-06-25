@@ -1,14 +1,29 @@
-export function activateComponent(componentId) {
-    document.querySelectorAll(".component").forEach(component => {
-        if (component.classList.contains("component-active")) {
-            component.classList.remove("component-active");
-            component.classList.add("component-completed");
+export function activateComponent(componentIds) {
+    // Remove estados anteriores de todos os componentes
+    document.querySelectorAll(".component").forEach(c => {
+        c.classList.remove("component-active", "component-completed", "component-parallel");
+    });
+
+    // Garante que componentIds seja um array
+    const components = Array.isArray(componentIds) ? componentIds : [componentIds];
+
+    // Ativa todos os componentes da lista
+    components.forEach(componentId => {
+        const component = document.getElementById(componentId);
+        if (component) {
+            component.classList.add("component-active");
         }
     });
 
-    const component = document.getElementById(componentId);
-    if (!component) return;
-    component.classList.add("component-active");
+    // Se há mais de 1 componente ativo, aplica a cor paralela (amarelo)
+    if (components.length > 1) {
+        components.forEach(componentId => {
+            const component = document.getElementById(componentId);
+            if (component) {
+                component.classList.add("component-parallel");
+            }
+        });
+    }
 }
 
 export function activateLine(architecture, componentId) {
@@ -19,7 +34,6 @@ export function activateLine(architecture, componentId) {
         }
     });
 
-    // MIPS: cada componente pode ter múltiplas linhas
     const mipsMap = {
         "mips-pc": ["mips-line-1"],
         "mips-inst-memory": ["mips-line-2"],
@@ -29,7 +43,6 @@ export function activateLine(architecture, componentId) {
         "mips-data-memory": ["mips-line-mem-reg-1", "mips-line-mem-reg-2", "mips-line-mem-reg-3"]
     };
 
-    // x86: cada componente pode ter múltiplas linhas
     const x86Map = {
         "x86-pc": ["x86-line-1"],
         "x86-inst-memory": ["x86-line-2"],
@@ -57,7 +70,7 @@ export function activateLine(architecture, componentId) {
 
 export function resetDatapath() {
     document.querySelectorAll(".component").forEach(component => {
-        component.classList.remove("component-active", "component-completed");
+        component.classList.remove("component-active", "component-completed", "component-parallel");
     });
 
     document.querySelectorAll(".path-line").forEach(line => {

@@ -173,7 +173,12 @@ export const mipsProgram = {
                 {
                     component: "mips-registers",
                     title: "READ REGISTER",
-                    description: "$t2 = 8."
+                    description: "$t2 = 8 é lido do banco de registradores."
+                },
+                {
+                    component: "mips-alu",
+                    title: "ADDRESS CALCULATION",
+                    description: "A ULA calcula o endereço de C (base + offset)."
                 },
                 {
                     component: "mips-data-memory",
