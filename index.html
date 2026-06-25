@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador RISC x CISC</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <h1>Simulador RISC x CISC</h1>
+        <div class="header-actions">
+            <button id="theme-toggle">Alternar Tema</button>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section class="architecture-selector">
+            <button id="mips-btn" class="architecture-button active">MIPS (RISC)</button>
+            <button id="x86-btn" class="architecture-button">x86 (CISC)</button>
+        </section>
+
+
+        <section class="content-grid">
+
+            <aside class="panel">
+                <div class="panel-header">
+                    <h2>Código Assembly</h2>
+                </div>
+                <pre id="assembly-code" class="assembly-code"></pre>
+            </aside>
+
+            <section class="panel datapath-panel">
+                <div class="panel-header">
+                    <h2>Datapath</h2>
+                </div>
+                <div id="datapath-container">
+
+                    <svg id="mips-datapath" class="datapath-svg" viewBox="0 0 800 600">
+
+                        <rect id="mips-pc" class="component" x="80" y="60" width="140" height="50" rx="8" />
+                        <text x="150" y="90" text-anchor="middle">PC</text>
+                    
+                        <line id="mips-line-1" class="path-line" x1="220" y1="85" x2="340" y2="85" />
+                    
+                        <rect id="mips-inst-memory" class="component" x="340" y="60" width="160" height="50" rx="8" />
+                        <text x="420" y="90" text-anchor="middle">Mem. Instruções</text>
+                    
+                        <line id="mips-line-2" class="path-line" x1="420" y1="110" x2="420" y2="170" />
+                    
+                        <rect id="mips-control" class="component" x="340" y="170" width="160" height="50" rx="8" />
+                        <text x="420" y="200" text-anchor="middle">Controle</text>
+                    
+                        <line id="mips-line-3" class="path-line" x1="420" y1="220" x2="420" y2="280" />
+                    
+                        <line id="mips-line-control-alu-1" class="path-line" x1="500" y1="195" x2="700" y2="195" />
+                        <line id="mips-line-control-alu-2" class="path-line" x1="700" y1="195" x2="700" y2="305" />
+                        <line id="mips-line-control-alu-3" class="path-line" x1="700" y1="305" x2="720" y2="305" />
+                    
+                        <rect id="mips-registers" class="component" x="340" y="280" width="160" height="50" rx="8" />
+                        <text x="420" y="310" text-anchor="middle">Registradores</text>
+                    
+                        <line id="mips-line-5" class="path-line" x1="500" y1="305" x2="580" y2="305" />
+                    
+                        <rect id="mips-alu" class="component" x="580" y="280" width="140" height="50" rx="8" />
+                        <text x="650" y="310" text-anchor="middle">ULA</text>
+                    
+                        <line id="mips-line-alu-mem-1" class="path-line" x1="650" y1="330" x2="650" y2="395" />
+                        <line id="mips-line-alu-mem-2" class="path-line" x1="650" y1="395" x2="320" y2="395" />
+                    
+                        <rect id="mips-data-memory" class="component" x="160" y="370" width="160" height="50" rx="8" />
+                        <text x="240" y="400" text-anchor="middle">Mem. Dados</text>
+                    
+                        <line id="mips-line-mem-reg-1" class="path-line" x1="240" y1="420" x2="240" y2="470" />
+                        <line id="mips-line-mem-reg-2" class="path-line" x1="240" y1="470" x2="420" y2="470" />
+                        <line id="mips-line-mem-reg-3" class="path-line" x1="420" y1="470" x2="420" y2="330" />
+                    
+                    </svg>
+
+                    <svg id="x86-datapath" class="datapath-svg hidden" viewBox="0 0 800 650">
+
+                        <!-- PC -->
+                        <rect id="x86-pc" class="component" x="80" y="60" width="140" height="50" rx="8" />
+                        <text x="150" y="90" text-anchor="middle">PC</text>
+                    
+                        <!-- PC -> Memória -->
+                        <line id="x86-line-1" class="path-line" x1="220" y1="85" x2="340" y2="85" />
+                    
+                        <!-- Memória -->
+                        <rect id="x86-inst-memory" class="component" x="340" y="60" width="160" height="50" rx="8" />
+                        <text x="420" y="90" text-anchor="middle">Memória</text>
+                    
+                        <!-- Memória -> Decoder -->
+                        <line id="x86-line-2" class="path-line" x1="420" y1="110" x2="420" y2="160" />
+                    
+                        <!-- Decoder -->
+                        <rect id="x86-decoder" class="component" x="340" y="160" width="160" height="50" rx="8" />
+                        <text x="420" y="190" text-anchor="middle">Decoder</text>
+                    
+                        <!-- Decoder -> Microcódigo -->
+                        <line id="x86-line-3" class="path-line" x1="420" y1="210" x2="420" y2="260" />
+                    
+                        <!-- Microcódigo -->
+                        <rect id="x86-microcode" class="component" x="340" y="260" width="160" height="50" rx="8" />
+                        <text x="420" y="290" text-anchor="middle">Microcódigo</text>
+                    
+                        <!-- Microcódigo -> AGU -->
+                        <line id="x86-line-4" class="path-line" x1="420" y1="310" x2="420" y2="360" />
+                    
+                        <!-- AGU -->
+                        <rect id="x86-agu" class="component" x="340" y="360" width="160" height="50" rx="8" />
+                        <text x="420" y="390" text-anchor="middle">AGU</text>
+                    
+                        <!-- AGU -> Memória Dados (para load/store) -->
+                        <line id="x86-line-agu-mem-1" class="path-line" x1="340" y1="385" x2="240" y2="385" />
+                        <line id="x86-line-agu-mem-2" class="path-line" x1="240" y1="385" x2="240" y2="450" />
+                    
+                        <!-- Memória de Dados -->
+                        <rect id="x86-memory" class="component" x="160" y="450" width="160" height="50" rx="8" />
+                        <text x="240" y="480" text-anchor="middle">Dados</text>
+                    
+                        <!-- Memória Dados -> Registradores (load) -->
+                        <line id="x86-line-mem-reg-1" class="path-line" x1="240" y1="500" x2="240" y2="560" />
+                        <line id="x86-line-mem-reg-2" class="path-line" x1="240" y1="560" x2="420" y2="560" />
+                    
+                        <!-- AGU -> ULA (para operações aritméticas) -->
+                        <line id="x86-line-agu-alu" class="path-line" x1="500" y1="385" x2="580" y2="385" />
+                    
+                        <!-- ULA -->
+                        <rect id="x86-alu" class="component" x="580" y="360" width="140" height="50" rx="8" />
+                        <text x="650" y="390" text-anchor="middle">ULA</text>
+                    
+                        <!-- ULA -> FLAGS -->
+                        <line id="x86-line-7" class="path-line" x1="650" y1="410" x2="650" y2="470" />
+                    
+                        <!-- FLAGS -->
+                        <rect id="x86-flags" class="component" x="580" y="470" width="140" height="50" rx="8" />
+                        <text x="650" y="500" text-anchor="middle">FLAGS</text>
+                    
+                        <!-- ULA -> Registradores (write back de operações) -->
+                        <line id="x86-line-alu-reg-1" class="path-line" x1="580" y1="385" x2="580" y2="540" />
+                        <line id="x86-line-alu-reg-2" class="path-line" x1="580" y1="540" x2="420" y2="540" />
+                    
+                        <!-- Registradores -->
+                        <rect id="x86-registers" class="component" x="340" y="540" width="160" height="50" rx="8" />
+                        <text x="420" y="570" text-anchor="middle">Registradores</text>
+                    
+                        <!-- Registradores -> AGU (feedback para próximo endereço) -->
+                        <line id="x86-line-reg-agu" class="path-line" x1="420" y1="540" x2="420" y2="410" />
+                    
+                    </svg>
+
+                </div>
+            </section>
+
+            <aside class="panel">
+                <div class="panel-header">
+                    <h2>Estado Atual</h2>
+                </div>
+                <div class="state-container">
+                    <div class="info-grid">
+                        <div class="info-box">
+                            <h3>Registradores</h3>
+                            <div id="registers-container"></div>
+                        </div>
+                        <div class="info-box">
+                            <h3>Memória</h3>
+                            <div id="memory-container"></div>
+                        </div>
+                        <div class="info-box">
+                            <h3>Explicação</h3>
+                            <div id="explanation-container"></div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+        </section>
+        <section class="controls">
+            <button id="start-btn">Iniciar</button>
+            <button id="next-cycle-btn">Próximo Ciclo</button>
+            <button id="next-instruction-btn">Próxima Instrução</button>
+            <button id="run-all-btn">Executar Tudo</button>
+            <button id="reset-btn">Resetar</button>
+        </section>
+
+    </main>
+
+    <script type="module" src="./js/app.js"></script>
+
+</body>
+
+</html>
