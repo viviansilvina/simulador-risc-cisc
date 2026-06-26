@@ -55,40 +55,27 @@ export class SimulationService {
     }
 
     nextCycle() {
-
-        const instruction =
-            this.getInstruction();
-
-        if (!instruction) {
-            return null;
-        }
-
-        const cycle =
-            this.getCycle();
-
-        if (!cycle) {
-            return null;
-        }
-
-        this.applyEffect(
-            cycle.effect
-        );
-
+        const instruction = this.getInstruction();
+        if (!instruction) return null;
+    
+        const cycle = this.getCycle();
+        if (!cycle) return null;
+    
+        this.applyEffect(cycle.effect);
+    
+        const currentCycleIndex = this.cycleIndex;
+    
         this.cycleIndex++;
-
-        if (
-            this.cycleIndex >=
-            instruction.cycles.length
-        ) {
-
+    
+        if (this.cycleIndex >= instruction.cycles.length) {
             this.cycleIndex = 0;
-
             this.instructionIndex++;
         }
-
+    
         return {
             instruction,
-            cycle
+            cycle,
+            cycleIndex: currentCycleIndex  
         };
     }
 

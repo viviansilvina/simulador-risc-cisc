@@ -64,18 +64,5 @@
     transition: all .3s ease;
 }
 
-.path-line-active {
 
-    stroke: #2563eb;
-
-    stroke-dasharray: 10;
-
-    animation:
-        flow 1s linear infinite;
-}
-
-.path-line-completed {
-
-    stroke: #16a34a;
-}
 

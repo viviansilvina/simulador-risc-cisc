@@ -7,7 +7,6 @@ import { SimulationService } from "./services/simulationService.js";
 import { toggleTheme } from "./services/themService.js";
 import {
     activateComponent,
-    activateLine,
     resetDatapath
 } from "./ui/datapathRenderer.js";
 import { renderExplanation } from "./ui/explanationRenderer.js";
@@ -37,28 +36,33 @@ const runAllButton = document.getElementById("run-all-btn");
 const themeToggleButton = document.getElementById("theme-toggle");
 
 // CONFIGURAÇÕES
-const parallelComponents = {
-    "mips-control": ["mips-registers", "mips-alu"],
-    "mips-registers": ["mips-control", "mips-alu"],
-    "mips-alu": ["mips-control", "mips-registers"],
-    "x86-agu": ["x86-memory", "x86-alu"],
-    "x86-alu": ["x86-agu", "x86-flags"],
-    "x86-flags": ["x86-alu"]
-};
-
+const parallelComponents = {}
 // FUNÇÕES AUXILIARES
 
-// Ativa componente principal e seus componentes paralelos
-function activateComponentWithParallel(componentId) {
-    let componentsToActivate = [componentId];
+function activateComponentWithParallel(componentIdOrArray) {
+    let componentsToActivate = Array.isArray(componentIdOrArray) 
+        ? [...componentIdOrArray] 
+        : [componentIdOrArray];
     
-    const parallel = parallelComponents[componentId];
-    if (parallel) {
-        componentsToActivate = [...componentsToActivate, ...parallel];
+    const arch = simulation.program.architecture.toLowerCase();
+    
+    if (arch === "x86") {
+        const originalComponents = [...componentsToActivate];
+        originalComponents.forEach(compId => {
+            const parallel = parallelComponents[compId];
+            if (parallel) {
+                parallel.forEach(p => {
+                    if (!componentsToActivate.includes(p)) {
+                        componentsToActivate.push(p);
+                    }
+                });
+            }
+        });
     }
     
+    // Ativa todos os componentes juntos
     activateComponent(componentsToActivate);
-    activateLine(simulation.program.architecture.toLowerCase(), componentId);
+    
 }
 
 // Função de delay para execução automática
@@ -271,7 +275,7 @@ async function runAll() {
             cycle,
             instructionIndex,
             simulation.program.instructions.length,
-            cycleIndex,
+            result.cycleIndex, 
             instruction.cycles.length
         );
         

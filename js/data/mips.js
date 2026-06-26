@@ -42,9 +42,9 @@ export const mipsProgram = {
                     description: "A Unidade de Controle identifica uma operação LOAD."
                 },
                 {
-                    component: "mips-alu",
+                    component: ["mips-registers", "mips-alu"],
                     title: "ADDRESS CALCULATION",
-                    description: "A ULA calcula o endereço da variável A."
+                    description: "A ULA calcula o endereço da variável A usando o registrador base."
                 },
                 {
                     component: "mips-data-memory",
@@ -85,7 +85,7 @@ export const mipsProgram = {
                     description: "LOAD identificado."
                 },
                 {
-                    component: "mips-alu",
+                    component: ["mips-registers", "mips-alu"],
                     title: "ADDRESS CALCULATION",
                     description: "Calculando endereço de B."
                 },
@@ -176,12 +176,12 @@ export const mipsProgram = {
                     description: "$t2 = 8 é lido do banco de registradores."
                 },
                 {
-                    component: "mips-alu",
+                    component: ["mips-registers", "mips-alu"],
                     title: "ADDRESS CALCULATION",
                     description: "A ULA calcula o endereço de C (base + offset)."
                 },
                 {
-                    component: "mips-data-memory",
+                    component: ["mips-registers", "mips-data-memory"],
                     title: "MEMORY WRITE",
                     description: "Valor 8 armazenado em C.",
 

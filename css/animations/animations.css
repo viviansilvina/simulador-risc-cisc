@@ -1,38 +1,29 @@
 /* =========================
-   PULSO
+   ANIMAÇÕES
 ========================= */
 
 @keyframes pulse {
-
-    0% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.03);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
-
-.component-active {
-    animation: pulse 1s infinite;
+    0% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+    100% { transform: scale(1); }
 }
 
 @keyframes flow {
-
-    from {
-        stroke-dashoffset: 20;
-    }
-
-    to {
-        stroke-dashoffset: 0;
-    }
+    from { stroke-dashoffset: 20; }
+    to { stroke-dashoffset: 0; }
 }
-.component-parallel {
+
+/* =========================
+   ESTADOS DOS COMPONENTES
+========================= */
+
+.component-active {
+    fill: #2563eb !important;
+    stroke: #2563eb !important;
+    animation: pulse 1s infinite;
+}
+
+.component-active.component-parallel {
     fill: #f59e0b !important; 
     stroke: #f59e0b !important;
-    animation: pulse 1s infinite;
 }

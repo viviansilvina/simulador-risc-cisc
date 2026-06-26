@@ -108,7 +108,7 @@ export const x86Program = {
                     description: "ULA executa 5 + 3 = 8."
                 },
                 {
-                    component: "x86-flags",
+                    component: ["x86-alu", "x86-flags"],
                     title: "FLAGS UPDATE",
                     description: "ZF=0 CF=0 OF=0."
                 },
