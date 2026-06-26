@@ -1,0 +1,16 @@
+/* =========================
+   PAINÉIS
+========================= */
+
+.panel {
+    border-radius: 16px;
+    padding: 20px;
+}
+
+.panel-header {
+    margin-bottom: 20px;
+}
+
+.panel-header h2 {
+    font-size: 1.2rem;
+}

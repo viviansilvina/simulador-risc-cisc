@@ -1,0 +1,19 @@
+/* =========================
+   ARQUITETURAS
+========================= */
+
+.architecture-selector {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.architecture-button {
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.architecture-button.active {
+    background-color: #16a34a !important;
+}

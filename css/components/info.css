@@ -1,0 +1,33 @@
+/* =========================
+   INFO
+========================= */
+
+.state-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.info-box {
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+body.light-theme .info-box {
+    background-color: #f3f4f6;
+}
+
+body.dark-theme .info-box {
+    background-color: #111827;
+}
+
+.info-box h3 {
+    margin-bottom: 10px;
+}
+
+#registers-container,
+#memory-container,
+#explanation-container {
+    line-height: 1.8;
+}

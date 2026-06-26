@@ -1,0 +1,20 @@
+/* =========================
+   HEADER
+========================= */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 20px 30px;
+}
+
+.header h1 {
+    font-size: 2rem;
+}
+
+#theme-toggle {
+    padding: 10px 16px;
+    border-radius: 8px;
+}

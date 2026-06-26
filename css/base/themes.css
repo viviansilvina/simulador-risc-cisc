@@ -1,0 +1,55 @@
+/* =========================
+   TEMA CLARO
+========================= */
+
+body.light-theme {
+    background-color: #f5f7fa;
+    color: #1f2937;
+}
+
+body.light-theme .panel {
+    background: #ffffff;
+    border: 1px solid #d1d5db;
+}
+
+body.light-theme .component {
+    fill: #e5e7eb;
+    stroke: #6b7280;
+}
+
+body.light-theme .assembly-code {
+    background-color: #f8fafc;
+}
+
+body.light-theme button {
+    background-color: #2563eb;
+    color: white;
+}
+
+/* =========================
+   TEMA ESCURO
+========================= */
+
+body.dark-theme {
+    background-color: #111827;
+    color: #f9fafb;
+}
+
+body.dark-theme .panel {
+    background: #1f2937;
+    border: 1px solid #374151;
+}
+
+body.dark-theme .component {
+    fill: #374151;
+    stroke: #9ca3af;
+}
+
+body.dark-theme .assembly-code {
+    background-color: #111827;
+}
+
+body.dark-theme button {
+    background-color: #2563eb;
+    color: white;
+}

@@ -1,0 +1,38 @@
+/* =========================
+   PULSO
+========================= */
+
+@keyframes pulse {
+
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.03);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.component-active {
+    animation: pulse 1s infinite;
+}
+
+@keyframes flow {
+
+    from {
+        stroke-dashoffset: 20;
+    }
+
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+.component-parallel {
+    fill: #f59e0b !important; 
+    stroke: #f59e0b !important;
+    animation: pulse 1s infinite;
+}

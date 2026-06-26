@@ -1,0 +1,81 @@
+/* =========================
+   DATAPATH
+========================= */
+
+.datapath-panel {
+    display: flex;
+    flex-direction: column;
+}
+
+#datapath-container {
+    width: 100%;
+    overflow: auto;
+}
+
+.datapath-svg {
+    width: 100%;
+    height: auto;
+}
+
+.datapath-svg text {
+    font-size: 14px;
+    font-weight: bold;
+    fill: currentColor;
+}
+
+.hidden {
+    display: none;
+}
+
+
+/* =========================
+   COMPONENTES CPU
+========================= */
+
+.component {
+    stroke-width: 2px;
+    rx: 10;
+    ry: 10;
+
+    transition:
+        fill 0.4s ease,
+        stroke 0.4s ease;
+}
+
+/* =========================
+   ESTADOS
+========================= */
+
+.component-active {
+    fill: #2563eb !important;
+    stroke: #2563eb !important;
+}
+
+.component-completed {
+    fill: #16a34a !important;
+    stroke: #16a34a !important;
+}
+
+
+.path-line {
+
+    stroke: #6b7280;
+    stroke-width: 2;
+    transition: all .3s ease;
+}
+
+.path-line-active {
+
+    stroke: #2563eb;
+
+    stroke-dasharray: 10;
+
+    animation:
+        flow 1s linear infinite;
+}
+
+.path-line-completed {
+
+    stroke: #16a34a;
+}
+

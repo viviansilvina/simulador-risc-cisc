@@ -1,0 +1,32 @@
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 1200px) {
+
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .assembly-code {
+        min-height: 250px;
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .architecture-selector {
+        flex-direction: column;
+    }
+
+    .controls {
+        flex-direction: column;
+    }
+
+}
