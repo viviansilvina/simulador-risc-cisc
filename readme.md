@@ -10,33 +10,17 @@ Este simulador foi desenvolvido como parte de um trabalho acadêmico de **Arquit
 
 Enquanto emuladores tradicionais como **MARS** e **emu8086** mostram apenas o código Assembly e os registradores, este simulador vai além: ele desenha o hardware por dentro, mostrando quais componentes (PC, Memória, ULA, Registradores, etc.) estão ativos em cada ciclo de execução.
 
-### O que ele prova?
-
-A frase clássica do livro *Arquitetura e Organização de Computadores* de **William Stallings**:
-
-> "RISC simplifica o hardware e complica o compilador. CISC complica o hardware para simplificar o código."
-
 ---
 
 ## Limitações Atuais (MVP Estático)
 
-Este simulador é um **Produto Mínimo Viável (MVP) focado em demonstração educacional**. Atualmente, ele opera de forma estática, ou seja:
+Este simulador é um **MVP focado na demonstração para fins educacionais**. Atualmente, ele opera de forma estática, ou seja:
 
 - O código Assembly é pré-definido (`C = A + B`).
 - Não há editor de código integrado para digitar novas instruções.
 - Os valores de memória e registradores são fixos no exemplo.
 
 O objetivo principal deste MVP é permitir a visualização clara do Datapath RISC E CISC.
-
-### Próximos Passos (Roadmap)
-
-Para tornar o simulador totalmente interativo no futuro, planeja-se implementar:
-
-- Editor de código Assembly integrado com destaque de sintaxe.
-- Parser/Assembler interno para traduzir texto digitado em micro-operações.
-- Definição dinâmica de variáveis e endereços de memória pelo usuário.
-- Suporte a mais instruções além das básicas de soma e load/store.
-- Visualização de pipeline e hazards de dados.
 
 ---
 
@@ -219,13 +203,10 @@ Este projeto demonstra conceitos fundamentais estudados na disciplina de Organiz
 
 ## Créditos
 
-Desenvolvido como trabalho acadêmico de **Arquitetura e Organização de Computadores**.
-
-**Referência principal:**
-> STALLINGS, William. *Arquitetura e Organização de Computadores*. 10ª ed. São Paulo: Pearson, 2017.
+Desenvolvido como auxílio para um trabalho acadêmico de **Arquitetura e Organização de Computadores**.
 
 ---
 
 ## Licença
 
-Projeto educacional de código aberto. Use livremente para fins acadêmicos e de estudo.
+Projeto educacional de código aberto. Use livremente para fins acadêmicos e de estudo, e se quiser, pode contribuir com o desenvolvimento.
